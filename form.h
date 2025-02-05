@@ -49,7 +49,7 @@ class form : public QMainWindow
             QCheckBox *qcheck = new QCheckBox(QString::fromStdString(cl.input_xlsx[i]), this);
             qcheck->setChecked(true);
             check_boxes.append(qcheck);
-            QObject::connect(qcheck, &QCheckBox::checkStateChanged, this, &form::onCheck);
+            QObject::connect(qcheck, &QCheckBox::stateChanged, this, &form::onCheck);
             vlayout->addWidget(qcheck);
             //ui.scrollArea->setWidget(&ui.verticalLayout);
         }
@@ -61,7 +61,7 @@ class form : public QMainWindow
         QCheckBox* check = qobject_cast<QCheckBox*>(sender());
         int ind = check_boxes.indexOf(check);
         if (ind < (int) cl.collected.size() && ind >= 0) {
-            cl.collected[ind] = false;
+            cl.collected[ind] = !cl.collected[ind];
         }
         onload_clicked = true;
     }
